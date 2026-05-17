@@ -1,12 +1,11 @@
 export const AchievementsSection = () => {
-  // 1. Cấu trúc dữ liệu Năng lực ngoại ngữ
   const languages = [
     {
       id: "eng",
       code: "EN",
       title: "TOEIC Certificate",
       provider: "IIG Vietnam",
-      score: "850+",
+      score: "650+",
       label: "Score",
       theme: { bg: "bg-blue-50", text: "text-[#0077b6]" },
     },
@@ -15,41 +14,39 @@ export const AchievementsSection = () => {
       code: "JP",
       title: "Japanese JLPT",
       provider: "Japan Foundation",
-      score: "N2",
+      score: "N5",
       label: "Level",
       theme: { bg: "bg-red-50", text: "text-red-600" },
     },
   ];
 
-  // 2. Cấu trúc dữ liệu Thành tích học tập
   const awards = [
     {
-      id: "scholarship",
-      title: "Học bổng khuyến khích học tập",
-      year: "2023 - 2024",
-      description: "Đạt loại Giỏi 2 kỳ liên tiếp tại ĐH XYZ",
+      id: 2,
+      title: "Giải Nhất Hackathon SGU 2024",
+      year: "2024",
+      description: "Cấp khoa CNTT",
       borderColor: "border-yellow-400",
     },
     {
-      id: "olympic",
-      title: "Giải Nhì Olympic Tin học",
-      year: "2022",
-      description: "Cấp trường - Bảng không chuyên",
-      borderColor: "border-slate-300",
+      id: 3,
+      title: "Giải khuyến khích COPLAY UIT 2023",
+      year: "2023",
+      description: "Đại học Công nghệ thông tin - UIT",
+      borderColor: "border-[#0077b6]",
     },
     {
-      id: "sv5t",
-      title: "Sinh viên 5 tốt",
-      year: "2023",
-      description: "Cấp khoa CNTT",
-      borderColor: "border-[#0077b6]",
+      id: 1,
+      title: "Học bổng khuyến khích học tập",
+      year: "2023 - 2024",
+      description: "Đạt loại Giỏi 2 kỳ liên tiếp tại ĐH Sài Gòn",
+      borderColor: "border-slate-300",
     },
   ];
 
   return (
     <section id="achievements" className="py-20 bg-slate-50">
-      <div className="max-w-5xl mx-auto px-5">
-        {/* Tiêu đề Section */}
+      <div className="max-w-300 mx-auto px-5">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#0077b6] mb-3 font-serif">
             Chứng chỉ & Giải thưởng
@@ -57,9 +54,7 @@ export const AchievementsSection = () => {
           <p className="text-slate-500 font-medium">Những cột mốc đáng nhớ</p>
         </div>
 
-        {/* Khung lưới 2 chiều (2D Grid) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-          {/* CỘT 1: Ngoại ngữ */}
           <div>
             <h3 className="text-xl font-bold text-slate-800 mb-6 pl-4 border-l-4 border-[#0077b6]">
               Năng lực ngoại ngữ
@@ -99,7 +94,6 @@ export const AchievementsSection = () => {
             </div>
           </div>
 
-          {/* CỘT 2: Thành tích học tập */}
           <div>
             <h3 className="text-xl font-bold text-slate-800 mb-6 pl-4 border-l-4 border-[#0077b6]">
               Thành tích học tập

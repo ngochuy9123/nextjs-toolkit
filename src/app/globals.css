@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Light Mode (Tối giản, độ sáng cao) */
+  --bg-base: #fafafa; /* Xám kẽm cực nhạt */
+  --bg-surface: #ffffff; /* Trắng tinh khiết */
+  --text-main: #18181b; /* Xám kẽm đậm (mềm hơn màu đen #000) */
+  --text-muted: #52525b; /* Xám trung tính */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --theme-primary: #0d9488; /* Teal 600 - Điểm nhấn tươi sáng, chuyên nghiệp */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Dark Mode (Độ tương phản mềm, loại bỏ cảm giác "tối thui") */
+    --bg-base: #18181b; /* Xám kẽm tối */
+    --bg-surface: #27272a; /* Xám bề mặt nổi */
+    --text-main: #f4f4f5; /* Trắng xám */
+    --text-muted: #a1a1aa; /* Xám sáng */
+
+    --theme-primary: #2dd4bf; /* Teal 400 - Đẩy độ sáng lên để nổi bật trên nền tối */
   }
 }
 
+@theme inline {
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-content: var(--text-main);
+  --color-muted: var(--text-muted);
+
+  --color-primary: var(--theme-primary);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-base);
+  color: var(--text-main);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

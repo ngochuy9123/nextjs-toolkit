@@ -15,7 +15,7 @@ export const AboutSection = () => {
 
   return (
     <section id="about" className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-5">
+      <div className="max-w-300 mx-auto px-5">
         {/* Tiêu đề Section */}
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">

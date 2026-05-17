@@ -2,6 +2,7 @@
 
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
 import { useState, ReactNode, createContext, useContext, useRef } from "react";
+
 interface DropDownContextType {
   isOpen: boolean;
   toggle: () => void;
@@ -33,7 +34,7 @@ export const DropDownMenu = ({ children }: { children: ReactNode }) => {
   const { isOpen } = useDropdownContext();
   if (!isOpen) return null;
   return (
-    <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-white shadow-lg border border-gray-200 rounded-md">
+    <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-white shadow-lg border border-zinc-200 rounded-md transition-colors duration-300">
       {children}
     </div>
   );
