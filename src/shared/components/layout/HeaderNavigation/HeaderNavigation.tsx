@@ -4,16 +4,26 @@ import Link from "next/link";
 import { HEADER_NAV_DATA, NavItemType } from "./navigation.config";
 import { useState, useRef } from "react";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
+import { ArrowLeft, ArrowRight, ChevronRight, LayoutGrid } from "lucide-react";
 
 const DesktopNavNode = ({ item }: { item: NavItemType }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
+  const [activeSubId, setActiveSubId] = useState<string | null>(null);
   const containerRef = useRef<HTMLLIElement>(null);
 
   useClickOutside(containerRef, () => {
     setIsLocked(false);
     setIsHovered(false);
+    setActiveSubId(null);
   });
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (!isLocked) {
+      setActiveSubId(null);
+    }
+  };
 
   const hasChildren = item.children && item.children.length > 0;
   const isVisible = isHovered || isLocked;
@@ -36,7 +46,7 @@ const DesktopNavNode = ({ item }: { item: NavItemType }) => {
       ref={containerRef}
       className="relative list-none"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleMouseLeave}
     >
       <div
         className={`flex items-center justify-between px-3 py-2 rounded-md cursor-pointer transition-colors select-none ${
@@ -66,88 +76,114 @@ const DesktopNavNode = ({ item }: { item: NavItemType }) => {
       </div>
 
       {isVisible && (
-        <div className="absolute top-full left-0 pt-2 z-50">
-          {/* Thay đổi padding và độ rộng tùy thuộc vào cấp độ lồng nhau */}
-          <ul className="min-w-[320px] bg-white border border-gray-200 shadow-xl rounded-xl p-2 flex flex-col gap-1">
-            {item.children!.map((child) => (
-              <li key={child.id} className="list-none group relative">
-                <Link
-                  href={child.href || "#"}
-                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group/link"
+        <div className="absolute top-full left-0 pt-2 z-50 cursor-default">
+          <div className="bg-white border border-gray-200 shadow-xl rounded-xl overflow-hidden transition-all duration-300 origin-top-left">
+            {activeSubId ? (
+              <div className="p-5 w-[480px]">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSubId(null);
+                  }}
+                  className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 font-bold text-[0.85rem] mb-4 transition-colors"
                 >
-                  {child.icon && child.theme && (
-                    <div
-                      className={`shrink-0 mt-0.5 w-10 h-10 rounded-lg flex items-center justify-center ${child.theme.bg} ${child.theme.text} transition-transform group-hover/link:scale-105`}
-                    >
-                      {child.icon}
-                    </div>
-                  )}
-                  <div className="flex flex-col flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[0.95rem] font-bold text-zinc-900 group-hover/link:text-primary transition-colors">
-                        {child.label}
-                      </span>
-                      {child.children && (
-                        <span className="text-zinc-400">
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="m9 18 6-6-6-6" />
-                          </svg>
-                        </span>
-                      )}
-                    </div>
-                    {child.description && (
-                      <span className="text-[0.8rem] text-zinc-500 leading-snug mt-0.5">
-                        {child.description}
-                      </span>
-                    )}
-                  </div>
-                </Link>
+                  <ArrowLeft size={16} strokeWidth={2.5} /> Back to {item.label}
+                </button>
 
-                {/* Render Recursive Child Nodes for Depth > 1 (e.g., Data Format -> JSON Formatter) */}
-                {child.children && (
-                  <div className="hidden group-hover:block absolute top-0 left-full pl-2 z-50 w-full min-w-[320px]">
-                    <ul className="bg-white border border-gray-200 shadow-xl rounded-xl p-2 flex flex-col gap-1">
-                      {child.children.map((subChild) => (
-                        <li key={subChild.id} className="list-none">
-                          <Link
-                            href={subChild.href || "#"}
-                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group/sublink"
+                <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                  {item
+                    .children!.find((c) => c.id === activeSubId)
+                    ?.children?.map((subChild) => (
+                      <Link
+                        key={subChild.id}
+                        href={subChild.href || "#"}
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/sub"
+                      >
+                        {subChild.icon && (
+                          <div
+                            className={`shrink-0 text-zinc-400 group-hover/sub:text-primary transition-colors ${subChild.theme?.text}`}
                           >
-                            {subChild.icon && subChild.theme && (
+                            {subChild.icon}
+                          </div>
+                        )}
+                        <span className="text-[0.9rem] font-medium text-zinc-700 group-hover/sub:text-primary transition-colors">
+                          {subChild.label}
+                        </span>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            ) : (
+              <div className="p-2 min-w-[280px]">
+                <ul className="flex flex-col gap-1 m-0 p-0">
+                  {item.children!.map((child) => (
+                    <li key={child.id} className="list-none">
+                      {child.children && child.children.length > 0 ? (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveSubId(child.id);
+                          }}
+                          className="flex w-full items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group/link text-left"
+                        >
+                          <div className="flex items-center gap-3">
+                            {child.icon && (
                               <div
-                                className={`shrink-0 mt-0.5 w-10 h-10 rounded-lg flex items-center justify-center ${subChild.theme.bg} ${subChild.theme.text} transition-transform group-hover/sublink:scale-105`}
+                                className={`shrink-0 w-8 h-8 rounded-md flex items-center justify-center ${child.theme?.bg} ${child.theme?.text} transition-transform group-hover/link:scale-105`}
                               >
-                                {subChild.icon}
+                                {child.icon}
                               </div>
                             )}
-                            <div className="flex flex-col">
-                              <span className="text-[0.95rem] font-bold text-zinc-900 group-hover/sublink:text-primary transition-colors">
-                                {subChild.label}
-                              </span>
-                              {subChild.description && (
-                                <span className="text-[0.8rem] text-zinc-500 leading-snug mt-0.5">
-                                  {subChild.description}
-                                </span>
-                              )}
+                            <span className="text-[0.95rem] font-bold text-zinc-900 group-hover/link:text-primary transition-colors">
+                              {child.label}
+                            </span>
+                          </div>
+                          <ChevronRight
+                            size={16}
+                            strokeWidth={2.5}
+                            className="text-zinc-400 group-hover/link:text-primary transition-colors"
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          href={child.href || "#"}
+                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group/link"
+                        >
+                          {child.icon && (
+                            <div
+                              className={`shrink-0 w-8 h-8 rounded-md flex items-center justify-center ${child.theme?.bg} ${child.theme?.text} transition-transform group-hover/link:scale-105`}
+                            >
+                              {child.icon}
                             </div>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
+                          )}
+                          <span className="text-[0.95rem] font-bold text-zinc-900 group-hover/link:text-primary transition-colors">
+                            {child.label}
+                          </span>
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Kỹ thuật: Cấu trúc Layout Grid giả lập */}
+                <div className="mt-2 pt-2 border-t border-gray-100 px-2 pb-1">
+                  <Link
+                    href={item.href || "#"}
+                    className="flex w-full items-center p-3 rounded-lg bg-transparent hover:bg-gray-50 transition-colors group/viewall text-zinc-900 hover:text-primary"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="shrink-0 w-8 h-8 rounded-md flex items-center justify-center bg-gray-100 text-zinc-500 group-hover/viewall:bg-primary/10 group-hover/viewall:text-primary transition-all duration-200">
+                        <LayoutGrid size={18} strokeWidth={2.5} />
+                      </div>
+                      <span className="text-[0.95rem] font-bold">
+                        View All {item.label}
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </li>
@@ -209,7 +245,7 @@ const MobileNavNode = ({
       </div>
 
       {isExpanded && (
-        <div className="bg-gray-50 pl-2 border-l-2 border-primary/30 ml-2 my-1 rounded-bl-md">
+        <div className="bg-gray-50 pl-2 border-l-2 border-primary/30 ml-2 my-1 rounded-bl-md pb-2">
           {item.children!.map((child) => (
             <MobileNavNode
               key={child.id}
@@ -218,6 +254,19 @@ const MobileNavNode = ({
               depth={depth + 1}
             />
           ))}
+
+          <Link
+            href={item.href || "#"}
+            onClick={closeMenu}
+            className="flex items-center gap-3 py-3 px-4 mt-2 bg-transparent text-zinc-900 hover:bg-gray-50 hover:text-primary rounded-md mx-2 transition-colors group/viewall"
+          >
+            <div className="shrink-0 text-zinc-500 group-hover/viewall:text-primary transition-colors">
+              <LayoutGrid size={18} strokeWidth={2.5} />
+            </div>
+            <span className="font-bold text-[0.95rem]">
+              View All {item.label}
+            </span>
+          </Link>
         </div>
       )}
     </div>
@@ -278,7 +327,7 @@ export const HeaderNavigation = () => {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto bg-white">
+            <div className="flex-1 overflow-y-auto bg-white pb-4">
               {HEADER_NAV_DATA.map((item) => (
                 <MobileNavNode
                   key={item.id}
