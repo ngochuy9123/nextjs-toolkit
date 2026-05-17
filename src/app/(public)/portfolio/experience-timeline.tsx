@@ -50,7 +50,7 @@ export const ExperienceTimeline = () => {
     },
     {
       id: "fascon",
-      period: "04/2024 - 11/2025",
+      period: "04/2024 - 11/2024",
       role: "AI Developer Intern",
       organization: "FASCON Co., Ltd",
       theme: {
