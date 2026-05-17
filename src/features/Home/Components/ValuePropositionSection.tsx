@@ -37,7 +37,7 @@ const ValuePropositionSection = () => {
         {/* Header Section: Sử dụng Center Alignment theo mẫu */}
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-3xl md:text-5xl font-bold text-content">
-            Why htcUtils?
+            Why ToolKit?
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-muted">
             Built for developers and power users who value privacy and speed.
