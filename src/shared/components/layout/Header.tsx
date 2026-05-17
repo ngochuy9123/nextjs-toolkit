@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Dropdown } from "../ui/Dropdown";
-import Link from "next/link";
+import { Dropdown, DropDownMenu, DropdownTrigger } from "../ui/Dropdown";
+
+import { HeaderNavigation } from "./HeaderNavigation/HeaderNavigation";
 
 export const Header = () => {
   return (
@@ -23,117 +24,37 @@ export const Header = () => {
               </svg>
             </a>
           </div>
-          <div className="md:flex md:items-center md:gap-12">
-            <nav aria-label="Global" className="hidden md:block">
-              <ul className="flex items-center gap-6 text-sm">
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+          <div className="flex items-center justify-end gap-3 md:gap-6">
+            <HeaderNavigation />
+
+            <div className="relative block z-50">
+              <Dropdown>
+                <DropdownTrigger>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center overflow-hidden rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500 w-9 h-9 md:w-11 md:h-11 shrink-0"
                   >
-                    {" "}
-                    About{" "}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Careers{" "}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    History{" "}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Services{" "}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Projects{" "}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Blog{" "}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <div className="hidden md:relative md:block">
-              <Dropdown
-                // Truyền cái Avatar vào làm nút kích hoạt (trigger)
-                trigger={
-                  <div className="overflow-hidden rounded-full border border-gray-300 shadow-inner hover:ring-2 hover:ring-teal-500 transition">
                     <Image
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1160"
-                      alt="User Avatar"
-                      width={40}
-                      height={40}
-                      className="size-10 object-cover"
+                      src="https://a.storyblok.com/f/178900/1920x1080/21f84a6d49/e64be766aa2a3ce3811fc5a31454a0d71663339986_main.jpg/m/filters:quality(95)format(webp)"
+                      alt="User avatar"
+                      width={44}
+                      height={44}
+                      className="object-cover w-full h-full"
                     />
+                  </button>
+                </DropdownTrigger>
+                <DropDownMenu>
+                  <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-gray-800 cursor-pointer transition-colors text-sm">
+                    <span>My Portfolio</span>
                   </div>
-                }
-              >
-                <div className="p-2">
-                  <Link
-                    href="/config-data"
-                    className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                  >
-                    Cấu hình hệ thống
-                  </Link>
-                </div>
-                <div className="p-2">
-                  <form method="POST" action="#">
-                    <button
-                      type="submit"
-                      className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50 transition"
-                    >
-                      Đăng xuất
-                    </button>
-                  </form>
-                </div>
+                  <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-gray-800 cursor-pointer transition-colors text-sm">
+                    <span>Account Info</span>
+                  </div>
+                  <div className="px-4 py-2 hover:bg-red-50 text-red-600 font-medium cursor-pointer transition-colors text-sm">
+                    <span>Sign Out</span>
+                  </div>
+                </DropDownMenu>
               </Dropdown>
-            </div>
-            <div className="block md:hidden">
-              <button className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
             </div>
           </div>
         </div>

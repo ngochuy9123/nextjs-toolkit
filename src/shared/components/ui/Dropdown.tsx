@@ -1,46 +1,57 @@
 "use client";
 
-import { useState, useRef, useEffect, ReactNode } from "react";
-
-interface DropdownProps {
-  trigger: ReactNode;
-  children: ReactNode;
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
+import { useState, ReactNode, createContext, useContext, useRef } from "react";
+interface DropDownContextType {
+  isOpen: boolean;
+  toggle: () => void;
+  setIsOpen: (value: boolean) => void;
 }
 
-export const Dropdown = ({ trigger, children }: DropdownProps) => {
+const DropdownContext = createContext<DropDownContextType | undefined>(
+  undefined,
+);
+
+export const useDropdownContext = () => {
+  const context = useContext(DropdownContext);
+  if (context === undefined) {
+    throw new Error("Error DropDown");
+  }
+  return context;
+};
+
+export const DropdownTrigger = ({ children }: { children: ReactNode }) => {
+  const { toggle } = useDropdownContext();
+  return (
+    <div onClick={toggle} className="cursor-pointer select-none">
+      {children}
+    </div>
+  );
+};
+
+export const DropDownMenu = ({ children }: { children: ReactNode }) => {
+  const { isOpen } = useDropdownContext();
+  if (!isOpen) return null;
+  return (
+    <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-white shadow-lg border border-gray-200 rounded-md">
+      {children}
+    </div>
+  );
+};
+
+export const Dropdown = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
+  const contextValue = { isOpen, toggle, setIsOpen };
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
+  useClickOutside(dropdownRef, () => setIsOpen(false));
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
-      <div
-        onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer select-none"
-      >
-        {trigger}
+    <DropdownContext.Provider value={contextValue}>
+      <div ref={dropdownRef} className="relative inline-block text-left">
+        {children}
       </div>
-
-      {isOpen && (
-        <div
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg focus:outline-none"
-          onClick={() => setIsOpen(false)}
-        >
-          {children}
-        </div>
-      )}
-    </div>
+    </DropdownContext.Provider>
   );
 };
