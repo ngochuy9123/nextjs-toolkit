@@ -1,7 +1,13 @@
+import CTASection from "@/features/Home/Components/CTASection";
+import HeroSection from "@/features/Home/Components/HeroSection";
+import ValuePropositionSection from "@/features/Home/Components/ValuePropositionSection";
+
 export default function Home() {
   return (
-    <div className=" text-white p-10 text-center font-bold text-2xl">
-      Hello NextJS
+    <div className=" ">
+      <HeroSection />
+      <ValuePropositionSection />
+      <CTASection />
     </div>
   );
 }

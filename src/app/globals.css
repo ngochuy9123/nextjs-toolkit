@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode (Tối giản, độ sáng cao) */
-  --bg-base: #fafafa; /* Xám kẽm cực nhạt */
-  --bg-surface: #ffffff; /* Trắng tinh khiết */
-  --text-main: #18181b; /* Xám kẽm đậm (mềm hơn màu đen #000) */
-  --text-muted: #52525b; /* Xám trung tính */
+  /* Canvas-First Light Mode (Trắng tinh khiết chủ đạo) */
+  --bg-base: #ffffff; /* Nền móng: Trắng tuyệt đối */
+  --bg-surface: #f8fafc; /* Bề mặt nổi: Trắng xanh cực nhạt để phân biệt khối */
+  --text-main: #0f172a; /* Văn bản chính: Xanh đá đậm để đọc rõ trên nền trắng */
+  --text-muted: #64748b; /* Văn bản phụ: Xanh Slate mờ */
 
-  --theme-primary: #0d9488; /* Teal 600 - Điểm nhấn tươi sáng, chuyên nghiệp */
+  --theme-primary: #06b6d4; /* Cyan 500: Màu nhấn duy nhất trên nền trắng */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark Mode (Độ tương phản mềm, loại bỏ cảm giác "tối thui") */
-    --bg-base: #18181b; /* Xám kẽm tối */
-    --bg-surface: #27272a; /* Xám bề mặt nổi */
-    --text-main: #f4f4f5; /* Trắng xám */
-    --text-muted: #a1a1aa; /* Xám sáng */
+    /* Canvas-First Dark Mode (Giữ nguyên không gian sáng, hạ nhẹ độ chói để bảo vệ mắt) */
+    --bg-base: #f8fafc;
+    --bg-surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
 
-    --theme-primary: #2dd4bf; /* Teal 400 - Đẩy độ sáng lên để nổi bật trên nền tối */
+    --theme-primary: #0891b2; /* Cyan 600: Đậm hơn một chút để tương phản tốt trên nền trắng */
   }
 }
 

@@ -2,20 +2,20 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="bg-abyss">
+    <footer className="bg-surface">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Logo Section */}
         <div className="flex justify-center">
           <Link
             href="/"
-            className="block text-2xl font-bold text-white transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+            className="block text-2xl font-bold text-content transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
           >
             Nguyen<span className="text-primary">Huy</span>
           </Link>
         </div>
 
         {/* Copyright Section */}
-        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-white/60">
+        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-muted">
           © 2026 Nguyen Huy. All rights reserved. <br />
           Designed with <span className="text-red-500">❤</span> by Huy
         </p>
@@ -24,7 +24,7 @@ export const Footer = () => {
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>
             <a
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
               href="#"
             >
               Home
@@ -32,7 +32,7 @@ export const Footer = () => {
           </li>
           <li>
             <a
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
               href="#"
             >
               Language Hub
@@ -40,7 +40,7 @@ export const Footer = () => {
           </li>
           <li>
             <a
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
               href="#"
             >
               Dev Sandbox
@@ -48,7 +48,7 @@ export const Footer = () => {
           </li>
           <li>
             <Link
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
               href="/portfolio"
             >
               About Me
@@ -63,7 +63,7 @@ export const Footer = () => {
               href="https://github.com/ngochuy9123"
               rel="noreferrer"
               target="_blank"
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
             >
               <span className="sr-only">GitHub</span>
               <svg
@@ -85,7 +85,7 @@ export const Footer = () => {
               href="mailto:ngochuy09123@gmail.com"
               rel="noreferrer"
               target="_blank"
-              className="text-white/70 transition-colors hover:text-white"
+              className="text-muted transition-colors hover:text-primary"
             >
               <span className="sr-only">Gmail</span>
               <svg
