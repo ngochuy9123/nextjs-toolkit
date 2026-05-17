@@ -57,6 +57,6 @@ export const HEADER_NAV_DATA: NavItemType[] = [
   {
     id: "about-me",
     label: "About Me",
-    href: "#",
+    href: "portfolio",
   },
 ];
