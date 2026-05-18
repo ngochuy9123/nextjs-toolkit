@@ -39,11 +39,16 @@ export const Header = () => {
                 </DropdownTrigger>
 
                 <DropDownMenu>
-                  <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-zinc-900 cursor-pointer transition-colors text-sm">
-                    <span>My Portfolio</span>
+                  <Link href={"portfolio"}>
+                    <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-zinc-900 cursor-pointer transition-colors text-sm">
+                      <span>My Portfolio</span>
+                    </div>
+                  </Link>
+                  <div className="px-4 py-2 border-b border-gray-100  hover:bg-gray-50 text-teal-600 cursor-pointer transition-colors text-sm">
+                    <span>Sign In</span>
                   </div>
-                  <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-zinc-900 cursor-pointer transition-colors text-sm">
-                    <span>Account Info</span>
+                  <div className="px-4 py-2 border-b border-gray-100 hover:bg-gray-50 text-blue-600 cursor-pointer transition-colors text-sm">
+                    <span>Sign Up</span>
                   </div>
                   <div className="px-4 py-2 hover:bg-red-50 text-red-600 font-medium cursor-pointer transition-colors text-sm">
                     <span>Sign Out</span>

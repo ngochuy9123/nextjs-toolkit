@@ -1,24 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  /* Canvas-First Light Mode (Trắng tinh khiết chủ đạo) */
-  --bg-base: #ffffff; /* Nền móng: Trắng tuyệt đối */
-  --bg-surface: #f8fafc; /* Bề mặt nổi: Trắng xanh cực nhạt để phân biệt khối */
-  --text-main: #0f172a; /* Văn bản chính: Xanh đá đậm để đọc rõ trên nền trắng */
-  --text-muted: #64748b; /* Văn bản phụ: Xanh Slate mờ */
-
-  --theme-primary: #06b6d4; /* Cyan 500: Màu nhấn duy nhất trên nền trắng */
+  /* Canvas-First Light Mode */
+  --bg-base: #ffffff;
+  --bg-surface: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --theme-primary: #06b6d4;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Canvas-First Dark Mode (Giữ nguyên không gian sáng, hạ nhẹ độ chói để bảo vệ mắt) */
     --bg-base: #f8fafc;
     --bg-surface: #ffffff;
     --text-main: #0f172a;
     --text-muted: #64748b;
-
-    --theme-primary: #0891b2; /* Cyan 600: Đậm hơn một chút để tương phản tốt trên nền trắng */
+    --theme-primary: #0891b2;
   }
 }
 
@@ -27,7 +24,6 @@
   --color-surface: var(--bg-surface);
   --color-content: var(--text-main);
   --color-muted: var(--text-muted);
-
   --color-primary: var(--theme-primary);
 }
 
@@ -36,4 +32,73 @@ body {
   color: var(--text-main);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .theme-blue {
+    --t-bg: var(--color-blue-50);
+    --t-text: var(--color-blue-600);
+    --t-border: var(--color-blue-200);
+    --t-hover: var(--color-blue-100);
+  }
+  .theme-rose {
+    --t-bg: var(--color-rose-50);
+    --t-text: var(--color-rose-600);
+    --t-border: var(--color-rose-200);
+    --t-hover: var(--color-rose-100);
+  }
+  .theme-emerald {
+    --t-bg: var(--color-emerald-50);
+    --t-text: var(--color-emerald-600);
+    --t-border: var(--color-emerald-200);
+    --t-hover: var(--color-emerald-100);
+  }
+  .theme-amber {
+    --t-bg: var(--color-amber-50);
+    --t-text: var(--color-amber-600);
+    --t-border: var(--color-amber-200);
+    --t-hover: var(--color-amber-100);
+  }
+  .theme-orange {
+    --t-bg: var(--color-orange-50);
+    --t-text: var(--color-orange-600);
+    --t-border: var(--color-orange-200);
+    --t-hover: var(--color-orange-100);
+  }
+  .theme-teal {
+    --t-bg: var(--color-teal-50);
+    --t-text: var(--color-teal-600);
+    --t-border: var(--color-teal-200);
+    --t-hover: var(--color-teal-100);
+  }
+  .theme-green {
+    --t-bg: var(--color-green-50);
+    --t-text: var(--color-green-600);
+    --t-border: var(--color-green-200);
+    --t-hover: var(--color-green-100);
+  }
+  .theme-cyan {
+    --t-bg: var(--color-cyan-50);
+    --t-text: var(--color-cyan-600);
+    --t-border: var(--color-cyan-200);
+    --t-hover: var(--color-cyan-100);
+  }
+  .theme-violet {
+    --t-bg: var(--color-violet-50);
+    --t-text: var(--color-violet-600);
+    --t-border: var(--color-violet-200);
+    --t-hover: var(--color-violet-100);
+  }
+  .theme-indigo {
+    --t-bg: var(--color-indigo-50);
+    --t-text: var(--color-indigo-600);
+    --t-border: var(--color-indigo-200);
+    --t-hover: var(--color-indigo-100);
+  }
+  .theme-sky {
+    --t-bg: var(--color-sky-50);
+    --t-text: var(--color-sky-600);
+    --t-border: var(--color-sky-200);
+    --t-hover: var(--color-sky-100);
+  }
 }

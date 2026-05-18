@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { HEADER_NAV_DATA, NavItemType } from "./navigation.config";
 import { useState, useRef } from "react";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
-import { ArrowLeft, ArrowRight, ChevronRight, LayoutGrid } from "lucide-react";
+import { ArrowLeft, ChevronRight, LayoutGrid } from "lucide-react";
+import {
+  MASTER_SITE_DATA,
+  SiteModuleType,
+} from "@/shared/constants/site-registry.data";
 
-const DesktopNavNode = ({ item }: { item: NavItemType }) => {
+const DesktopNavNode = ({ item }: { item: SiteModuleType }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [activeSubId, setActiveSubId] = useState<string | null>(null);
@@ -195,7 +198,7 @@ const MobileNavNode = ({
   closeMenu,
   depth = 0,
 }: {
-  item: NavItemType;
+  item: SiteModuleType;
   closeMenu: () => void;
   depth?: number;
 }) => {
@@ -283,7 +286,7 @@ export const HeaderNavigation = () => {
         className="hidden md:block relative z-50"
       >
         <ul className="flex items-center gap-1 text-sm m-0 p-0">
-          {HEADER_NAV_DATA.map((item) => (
+          {MASTER_SITE_DATA.map((item) => (
             <DesktopNavNode key={item.id} item={item} />
           ))}
         </ul>
@@ -328,7 +331,7 @@ export const HeaderNavigation = () => {
             </div>
 
             <div className="flex-1 overflow-y-auto bg-white pb-4">
-              {HEADER_NAV_DATA.map((item) => (
+              {MASTER_SITE_DATA.map((item) => (
                 <MobileNavNode
                   key={item.id}
                   item={item}
