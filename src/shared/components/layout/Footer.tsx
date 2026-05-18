@@ -23,28 +23,44 @@ export const Footer = () => {
         {/* Navigation Links */}
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>
-            <a
+            <Link
               className="text-muted transition-colors hover:text-primary"
-              href="#"
+              href="/"
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className="text-muted transition-colors hover:text-primary"
-              href="#"
+              href="/language-hub"
             >
               Language Hub
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className="text-muted transition-colors hover:text-primary"
-              href="#"
+              href="/dev-sandbox"
             >
               Dev Sandbox
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="text-muted transition-colors hover:text-primary"
+              href="/privacy"
+            >
+              Privacy
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="text-muted transition-colors hover:text-primary"
+              href="/contact"
+            >
+              Contact
+            </Link>
           </li>
           <li>
             <Link
